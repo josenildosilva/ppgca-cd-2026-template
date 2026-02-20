@@ -1,0 +1,38 @@
+name: CI — Verificação de Reprodutibilidade
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Verifica se o ambiente é reprodutível
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: 🐍 Instalar uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: 📦 Instalar dependências (uv sync)
+        run: uv sync
+
+      - name: ✅ Verificar imports principais
+        run: |
+          uv run python -c "import duckdb; print('DuckDB OK:', duckdb.__version__)"
+          uv run python -c "import pandas; print('Pandas OK:', pandas.__version__)"
+          uv run python -c "import pandera; print('Pandera OK:', pandera.__version__)"
+          uv run python -c "import streamlit; print('Streamlit OK:', streamlit.__version__)"
+
+      - name: 🔍 Verificar que .env NÃO está no repositório
+        run: |
+          if [ -f ".env" ]; then
+            echo "❌ ERRO: Arquivo .env foi comitado! Remova-o imediatamente."
+            exit 1
+          else
+            echo "✅ Nenhum .env encontrado. Segurança OK."
+          fi

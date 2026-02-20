@@ -1,0 +1,63 @@
+# ==========================
+# SEGURANÇA — NUNCA COMITAR
+# ==========================
+.env
+*.key
+secrets.*
+
+# ==========================
+# AMBIENTE VIRTUAL (uv)
+# ==========================
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.uv/
+
+# ==========================
+# DADOS (camadas brutas e processadas)
+# Não versionar dados — usar DVC ou S3 se necessário
+# ==========================
+data/raw/*
+data/trusted/*
+data/mart/*
+data/feat/*
+!data/raw/.gitkeep
+!data/trusted/.gitkeep
+!data/mart/.gitkeep
+!data/feat/.gitkeep
+
+# ==========================
+# DUCKDB (banco local gerado)
+# ==========================
+*.duckdb
+*.duckdb.wal
+
+# ==========================
+# JUPYTER / QUARTO
+# ==========================
+.ipynb_checkpoints/
+_quarto/
+/.quarto/
+*_files/
+
+# ==========================
+# SISTEMA OPERACIONAL
+# ==========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================
+# IDEs
+# ==========================
+.vscode/
+.idea/
+*.swp
+
+# ==========================
+# BUILD / DIST
+# ==========================
+dist/
+build/
+*.egg-info/

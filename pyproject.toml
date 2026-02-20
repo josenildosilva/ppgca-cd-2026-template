@@ -1,0 +1,29 @@
+[project]
+name = "ppgca-cd-2026"
+version = "0.1.0"
+description = "Projeto Final - Mestrado Profissional em Ciência de Dados (PPGCA 2026.1)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "duckdb>=0.10.0",
+    "pandas>=2.0.0",
+    "pandera>=0.18.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "streamlit>=1.32.0",
+    "plotly>=5.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "quarto",
+    "jupyter",
+    "ipykernel",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "quarto",
+    "jupyter",
+    "ipykernel",
+]
